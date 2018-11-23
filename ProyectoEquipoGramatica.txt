@@ -1,0 +1,25 @@
+Datos -> Paciente Peso Altura Actividad Edad Sexo Enfermedad Alimento
+Sexo -> Sexo: Genero
+Genero -> M | F
+Enfermedad -> Enfermedades: Enfermedad0
+Enfermedad0 -> OpcionesEnfermedades Enfermedad0 | OpcionesEnfermedades
+OpcionesEnfermedades -> Presion: Numero mmHg | Glucosa: Numero mg/dl | Diabetes: TipoDiabetes | Trigliceridos: Numero mg/dl
+Alimento -> Alimentos: Alimento0
+Alimento0 -> OpcionesAlimentos Alimento0 | OpcionesAlimentos
+OpcionesAlimentos -> Lacteos | Carnes | Verduras | Embutidos | Cereales
+Paciente -> Nombre: Nombre
+Edad -> Edad: Numero
+Peso -> Peso: Numero kg
+Altura -> Altura: Numero m
+Actividad -> Actividad: Tipo
+Tipo -> Inexistente | Ligera | Moderada | Intensa
+TipoDiabetes -> Tipo1 | Tipo2
+
+Nombre: Nombre
+Peso: Numero kg
+Altura: Numero m
+Actividad: Moderada
+Edad: Numero
+Sexo: M 
+Enfermedades: Diabetes: Tipo1
+Alimentos: Verduras Carnes Lacteos

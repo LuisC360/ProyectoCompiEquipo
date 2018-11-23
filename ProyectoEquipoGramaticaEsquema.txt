@@ -1,0 +1,43 @@
+Datos -> Paciente Peso Altura Actividad Edad Sexo Antecedente Alimento  CreaDieta(Pila);
+Sexo -> Sexo: Genero    {  }
+Genero -> M  push("Sexo" + M);
+Genero -> F  push("Sexo" + F);
+Antecedente -> Antecedentes: Antecedente0             {  }
+Antecedente0 -> OpcionesAntecedentes Antecedente0     {  }
+Antecedente0 -> OpcionesAntecedentes                  {  }
+OpcionesAntecedentes -> Presion: Presion mmHg        {  }
+OpcionesAntecedentes -> Glucosa: Glucosa mg/dl       {  }
+OpcionesAntecedentes -> Diabetes: Diabetes mg/dl     {  }
+OpcionesAntecedentes -> Trigliceridos: Trigliceridos   {  }
+Presion ->  Numero                push("Presion" + Numero);
+Glucosa ->  Numero                 push("Glucosa" + Numero);
+Trigliceridos ->  Numero     push("Trigliceridos" + Numero);
+Diabetes ->  TipoDiabetes           {  }
+Alimento -> Alimentos: Alimento0             {  }
+Alimento0 -> OpcionesAlimentos Alimento0     {  }
+Alimento0 -> OpcionesAlimentos               {  }
+OpcionesAlimentos -> Lacteos     push("Alimento" + Lacteos);
+OpcionesAlimentos -> Carnes      push("Alimento" + Carnes);
+OpcionesAlimentos -> Verduras    push("Alimento" + Verduras);
+OpcionesAlimentos -> Embutidos   push("Alimento" + Embutidos);
+OpcionesAlimentos -> Cereales    push("Alimento" + Cereales);
+Paciente -> Nombre: Nombre   push("Nombre" + Nombre);
+Edad -> Edad: Numero años    push("Edad" + Numero);     
+Peso -> Peso: Numero kg      push("Peso" + Numero);
+Altura -> Altura: Numero m   push("Altura" + Numero);
+Actividad -> Actividad: Tipo  {  }
+Tipo -> Inexistente      push("Actividad" + Inexistente);
+Tipo -> Ligera           push("Actividad" + Ligera);
+Tipo -> Moderada         push("Actividad" + Moderada);
+Tipo -> Intensa          push("Actividad" + Intensa);
+TipoDiabetes -> Tipo1    push("Diabetes" + Tipo1);
+TipoDiabetes -> Tipo2    push("Diabetes" + Tipo2);
+
+Nombre: Nombre
+Peso: Numero kg
+Altura: Numero m
+Actividad: Moderada
+Edad: Numero
+Sexo: M 
+Antecedentes: Diabetes: Tipo1
+Alimentos: Verduras Carnes Lacteos

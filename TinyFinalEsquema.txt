@@ -1,0 +1,73 @@
+programa -> estructura def-main  { }
+programa -> def-main   { }
+estructura -> estructura sent-declara  { }
+estructura -> sent-declara             { }
+def-vent -> CreaVentana ( id , cadena , num , num , num , num ) { secuencia-ctrl }       pop(PilaCuadruplos); //secuencia-ctrl  index=UltimoCuadrupo(); push(creacuadrupo(CreaVentana, (id , cadena, num, num, num, num), secuencia-ctrl, index));
+def-vent -> CreaVentana ( id , cadena ) { secuencia-ctrl }    pop(PilaCuadruplos); //secuencia-ctrl  index=UltimoCuadrupo(); push(creacuadrupo(CreaVentana, (id , cadena), secuencia-ctrl, index)); 
+secuencia-ctrl -> secuencia-ctrl def-ctrl                     pop(PilaCuadruplos); //def-ctrl pop(PilaCuadruplos); //secuencia-ctrl index=UltimoCuadrupo(); push(creacuadrupo(CONNECT, secuencia-ctrl, def-ctrl, index));
+secuencia-ctrl -> def-ctrl   { }
+def-ctrl -> CreaBoton ( id , cadena , num , num , num , num ) { def-evnt }    pop(PilaCuadruplos); //def-evnt index=UltimoCuadrupo(); push(creacuadrupo(CreaBoton, (id , cadena ,num , num), def-evnt, index)); 
+def-ctrl -> CreaTextbox ( id , num , num , num , num ) ;                      index=UltimoCuadrupo(); push(creacuadrupo(CreaTextBox, (id , cadena), (num , num), index)); 
+def-ctrl -> CreaLabel ( id , cadena , num , num ) ;                           index=UltimoCuadrupo(); push(creacuadrupo(CreaLabel, (id , cadena), (num , num), index)); 
+def-evnt -> Click { secuencia-sent }                                          pop(PilaCuadruplos); //secuencia-sent index=UltimoCuadrupo(); push(creacuadrupo(Click, secuencia-sent, x, index)); 
+def-main -> defmain { secuencia-sent }        { }
+secuencia-sent -> sentencia secuencia-sent    pop(PilaCuadruplos); //secuencia-sent pop(PilaCuadruplos); //sentencia index=UltimoCuadrupo(); push(creacuadrupo(COMBINE, sentencia, secuencia-sent, index));
+secuencia-sent -> sentencia { }
+sentencia -> sent-if        { }
+sentencia -> sent-repeat    { } 
+sentencia -> sent-assign    { }
+sentencia -> sent-while     { }
+sentencia -> sent-do-while  { }  
+sentencia -> sent-switch    { } 
+sentencia -> sent-for       { }
+sentencia -> sent-func      { }
+sentencia -> def-vent       { }
+sentencia -> sent-declara   { }
+sent-if -> if ( exp ) { secuencia-sent }                              pop(PilaCuadruplos); //secuencia-sent pop(PilaCuadruplos); //exp  index=UltimoCuadrupo(); push(creacuadrupo(IF, exp, secuencia-sent, index)); 
+sent-if -> if ( exp ) { secuencia-sent } else { secuencia-sent }      pop(PilaCuadruplos); //secuencia-sent2 pop(PilaCuadruplos); //secuencia-sent1 pop(PilaCuadruplos); //exp  index=UltimoCuadrupo(); push(creacuadrupo(IF, (exp secuencia-sen1), secuencia-sent2, index)); 
+sent-repeat -> repeat { secuencia-sent } until ( exp )                pop(PilaCuadruplos); //exp pop(PilaCuadruplos); //secuencia-sent  index=UltimoCuadrupo(); push(creacuadrupo(REPEAT, secuencia-sent, exp, index)); 
+sent-assign -> id := exp ;            buscaexitePilaDeclara(id); pop(PilaCuadruplos); //exp verificatipos(id,exp); index=UltimoCuadrupo(); push(creacuadrupo(:=, id, exp, index)); 
+sent-assign -> id := id [ num ] ;     buscaexitePilaDeclara(id1); buscaexitePilaDeclara(id2); verificarreglo(id2,num); verificatipos(id1,id2); index=UltimoCuadrupo(); push(creacuadrupo(:=, id1, id2[num], index));
+sent-assign -> id [ num ] := exp ;    buscaexitePilaDeclara(id); verificarreglo(id,num); pop(PilaCuadruplos); //exp verificatipos(id,exp); index=UltimoCuadrupo(); push(creacuadrupo(:=, id[num], exp, index));
+sent-assign -> id [ id ] := exp ;     buscaexitePilaDeclara(id1); buscaexitePilaDeclara(id2); verificarreglo(id1,id2); pop(PilaCuadruplos); //exp verificatipos(id1,exp); index=UltimoCuadrupo(); push(creacuadrupo(:=, id[id], exp, index));
+sent-assign -> id := id [ id ] ;      buscaexitePilaDeclara(id1); buscaexitePilaDeclara(id2); buscaexitePilaDeclara(id3); verificarreglo(id2,id3); verificatipos(id1,id2); index=UltimoCuadrupo(); push(creacuadrupo(:=, id1, id2[id3], index));
+sent-while -> while ( exp ) { secuencia-sent }            pop(PilaCuadruplos); //secuencia-sent pop(PilaCuadruplos); //exp  index=UltimoCuadrupo(); push(creacuadrupo(WHILE, exp, secuencia-sent, index)); 
+sent-do-while -> do { secuencia-sent } while ( exp ) ;    pop(PilaCuadruplos); //exp pop(PilaCuadruplos); //secuencia-sent  index=UltimoCuadrupo(); push(creacuadrupo(DO-WHILE, secuencia-sent, exp, index)); 
+sent-switch -> switch ( id ) { secuencia-case }           buscaexitePilaDeclara(id); pop(PilaCuadruplos); //secuencia-case index=UltimoCuadrupo(); push(creacuadrupo(SWITCH, id, secuencia-case, index)); 
+secuencia-case -> secuencia-case sentencia-case          pop(PilaCuadruplos); //sentencia-case pop(PilaCuadruplos); //secuencia-case index=UltimoCuadrupo(); push(creacuadrupo(COMBINECASE, sentencia, secuencia-sent, index));
+secuencia-case -> sentencia-case                         {  }
+sentencia-case -> case id { secuencia-sent } break ;     buscaexitePilaDeclara(id); pop(PilaCuadruplos); //secuencia-case index=UltimoCuadrupo(); push(creacuadrupo(CASE, id, secuencia-case, index)); 
+sent-for -> for ( id := num : num , num ) { secuencia-sent }    buscaexitePilaDeclara(id); pop(PilaCuadruplos); //secuencia-sent1 index=UltimoCuadrupo(); push(creacuadrupo(FOR, (id := num , num , num), secuencia-sent, index));
+sent-func -> MessageBox ( cadena )                              index=UltimoCuadrupo(); push(creacuadrupo(SHOW, MessageBox, cadena.valex, index));
+sent-declara -> tipo identificadores           { }
+sent-declara -> tipo [ num ] identificadores   push(num); //PilaDeclara
+identificadores -> identificadores , id        push(id);  //PilaDeclara
+identificadores -> id                          push(id);  //PilaDeclara
+exp -> exp-simple op-comparacion exp-simple   pop(PilaCuadruplos); //exp-simple2  pop(PilaCuadruplos); //op-comparacion  pop(PilaCuadruplos); //exp-simple1 index=UltimoCuadrupo(); push(creacuadrupo(op-comp, exp-s1, exp-s2, index));
+exp -> exp-simple        { }
+op-comparacion -> ==     index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNCOMP, ==, x, index)); 
+op-comparacion -> \>     index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNCOMP, >, x, index)); 
+op-comparacion -> <      index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNCOMP, <, x, index)); 
+exp-simple -> exp-simple opsuma term  pop(PilaCuadruplos); //term pop(PilaCuadruplos); //opsuma pop(PilaCuadruplos); //exp-simple  index=UltimoCuadrupo(); push(creacuadrupo(opsuma, exp-simple, term, index));
+exp-simple -> term      { }
+opsuma -> +            index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNSUM, +, x, index)); 
+opsuma -> -            index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNSUM, -, x, index)); 
+tipo -> int            push(int);       //PilaDeclara
+tipo -> string         push(string);    //PilaDeclara
+tipo -> vent           push(vent);      //PilaDeclara
+tipo -> textBox        push(textBox);   //PilaDeclara
+tipo -> label          push(label);     //PilaDeclara
+tipo -> boton          push(boton);     //PilaDeclara
+tipo -> float          push(float);     //PilaDeclara
+term -> term opmult potencia    pop(PilaCuadruplos); //potencia pop(PilaCuadruplos); //opmult pop(PilaCuadruplos); //term  index=UltimoCuadrupo(); push(creacuadrupo(opmult, term, potencia, index));
+term -> potencia       { }
+potencia -> potencia ^ factor    pop(PilaCuadruplos); //FactorV pop(PilaCuadruplos); //PotenciaV  index=UltimoCuadrupo(); push(creacuadrupo(^, PotenciaV, FactorV, index));
+potencia -> factor     { }
+opmult -> *            index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNMUL, *, x, index)); 
+opmult -> /            index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNMUL, /, x, index)); 
+factor -> ( exp )      { }
+factor -> num          index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNINT, num, x, index)); 
+factor -> id           buscaexitePilaDeclara(id); index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNID, id, x, index)); 
+factor -> flotante     index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNFLOAT, flotante , x, index)); 
+factor -> cadena       index=UltimoCuadrupo(); push(creacuadrupo(ASSIGNCADENA, cadena, x, index)); 
+
