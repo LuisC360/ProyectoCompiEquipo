@@ -8,6 +8,9 @@ namespace Compiladores
 {
     class NT
     {
+        //Valor lexico del token de entrada
+        //public List<string> valex;
+        public string valex;
         //Es el nombre del terminal o no terminal
         public string nom;
         //Esta variable representa un primero.
@@ -28,6 +31,7 @@ namespace Compiladores
             esTerminal = true;
             oper = null;
             nCol = -1;
+            valex = null;
         }
 
         //Este metodo inicializa los NT.
@@ -56,6 +60,7 @@ namespace Compiladores
             copia.esTerminal = esTerminal;
             copia.oper = oper;
             copia.nCol = nCol;
+            copia.valex = valex;
             return copia;
         }
     }

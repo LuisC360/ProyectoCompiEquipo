@@ -66,6 +66,7 @@ namespace Compiladores
             if (org != null)
             {
                 n = org.copiar();
+                //n.valex = cad;
                 ltok.Add(n);
                 return true;
             }

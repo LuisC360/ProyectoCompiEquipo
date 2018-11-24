@@ -25,6 +25,12 @@ namespace Compiladores
         //Variable para identificar errores
         public string errorCelda;
 
+
+        public Stack<string> Esquema;//////////////////////// 
+        public int ReduTemp;
+        public List<string> Temporal;
+        string acciontrad;
+
         //Constructor donde se inicializan las variables
         public Algoritmos(RichTextBox txtbx)
         {
@@ -35,6 +41,10 @@ namespace Compiladores
             expreg.ladoIzq = new NT("E.R.");
             textgram = txtbx;
             tlr1 = false;
+            Esquema = new Stack<string>();///////////////////
+            ReduTemp = 0;
+            Temporal = new List<string>();
+            acciontrad = "";
         }
 
         //Metodo que busca los simbolos iniciales.
@@ -465,6 +475,7 @@ namespace Compiladores
         //Metodo para reducir la pila
         public bool reducir(Separa rg, Produccion pila, DataGridView tablan)
         {
+            //Temporal.Clear();
             string cad;
             if (rg.derecha[0].ltok[0].nom == "ε")
             {
@@ -479,6 +490,10 @@ namespace Compiladores
                     pila.removult();
                     if (pila.ult().nom == rg.derecha[0].ltok[i].nom)
                     {
+                        if (pila.ult().valex != null)
+                        {
+                            Acciones(ReduTemp, pila.ult().valex);
+                        }
                         pila.removult();
                     }
                     else
@@ -511,6 +526,7 @@ namespace Compiladores
             string accion = "";
             List<Separa> listaR = new List<Separa>();
             tabla.Rows.Clear();
+            Esquema.Clear();
 
             if (lregl.Count == 0)
             {
@@ -538,7 +554,6 @@ namespace Compiladores
                 linea = bloc2.Lines[fila];
                 if (linea.Length > 0)
                 {
-                   // linea = linea.Replace(" ", "℮");
                     linea = linea + " \0";
                     if (cadena.creaCadena(linea, contks) == false)
                         return false;
@@ -549,6 +564,7 @@ namespace Compiladores
 
             while (accion != "Aceptar")
             {
+                acciontrad = "";
                 accion = buscacel(tablaAS, int.Parse(pila.ult().nom), cadena.primero().nCol);
                 cadPila = pila.muestracontprod();
                 cadCad = cadena.muestracontprod();
@@ -564,9 +580,11 @@ namespace Compiladores
                     {
                         linea = accion.Replace("Reducir ", "");
                         row = int.Parse(linea);
+                        ReduTemp = row;
                         accion += "   " + listaR[row].mostrarr() ;
                         if ((reducir(listaR[row], pila, tablaAS) == true))
                         {
+                            
                             if (listaR[row].derecha[0].ltok[0].nom != "ε")
                             {
                                 linea = buscacel(tablaAS, int.Parse(pila.ult().nom), listaR[row].ladoIzq.nCol);
@@ -578,9 +596,97 @@ namespace Compiladores
                     }
                 }
                 else return false;
-                tabla.Rows.Add(cadPila, cadCad, accion);
+                
+                tabla.Rows.Add(cadPila, cadCad, accion, acciontrad);
             }
             return true;
+        }
+
+        public void Acciones(int NumRedu, string Valex)
+        {
+            switch(NumRedu)
+            {
+                case 3:
+                    Esquema.Push("Sexo" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 4:
+                    Esquema.Push("Sexo" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 12:
+                    Esquema.Push("Presion" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 13:
+                    Esquema.Push("Glucosa" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 14:
+                    Esquema.Push("Trigliceridos" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 19:
+                    Esquema.Push("Alimento" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 20:
+                    Esquema.Push("Alimento" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 21:
+                    Esquema.Push("Alimento" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 22:
+                    Esquema.Push("Alimento" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 23:
+                    Esquema.Push("Alimento" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 24:
+                    Esquema.Push("Nombre" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 25:
+                    Esquema.Push("Edad" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 26:
+                    Esquema.Push("Peso" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 27:
+                    Esquema.Push("Altura" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 29:
+                    Esquema.Push("Actividad" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 30:
+                    Esquema.Push("Actividad" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 31:
+                    Esquema.Push("Actividad" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 32:
+                    Esquema.Push("Actividad" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 33:
+                    Esquema.Push("Diabetes" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+                case 34:
+                    Esquema.Push("Diabetes" + Valex);
+                    acciontrad = "push ( " + Esquema.First() + " )";
+                    break;
+            }
         }
     }
 }
