@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -49,6 +50,18 @@
             this.Cadena = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Acciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccionTraduccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textoDieta = new System.Windows.Forms.RichTextBox();
+            this.alimentosDataSet = new Compiladores.AlimentosDataSet();
+            this.carnesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.carnesTableAdapter = new Compiladores.AlimentosDataSetTableAdapters.CarnesTableAdapter();
+            this.tableAdapterManager = new Compiladores.AlimentosDataSetTableAdapters.TableAdapterManager();
+            this.cerealesTableAdapter = new Compiladores.AlimentosDataSetTableAdapters.CerealesTableAdapter();
+            this.lacteosTableAdapter = new Compiladores.AlimentosDataSetTableAdapters.LacteosTableAdapter();
+            this.verdurasTableAdapter = new Compiladores.AlimentosDataSetTableAdapters.VerdurasTableAdapter();
+            this.cerealesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lacteosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.verdurasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -56,6 +69,12 @@
             this.Codigo.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.alimentosDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.carnesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cerealesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lacteosBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.verdurasBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -64,12 +83,13 @@
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.richTextBox1);
-            this.groupBox1.Location = new System.Drawing.Point(14, 12);
+            this.groupBox1.Location = new System.Drawing.Point(90, 138);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(862, 374);
+            this.groupBox1.Size = new System.Drawing.Size(38, 46);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Gramatica";
+            this.groupBox1.Visible = false;
             // 
             // button3
             // 
@@ -89,7 +109,6 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Guardar";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -99,7 +118,6 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Abrir";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1
             // 
@@ -108,12 +126,11 @@
             this.richTextBox1.Size = new System.Drawing.Size(848, 306);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.treeView1);
-            this.groupBox2.Location = new System.Drawing.Point(882, 12);
+            this.groupBox2.Location = new System.Drawing.Point(142, 148);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(45, 15);
             this.groupBox2.TabIndex = 1;
@@ -132,12 +149,13 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dataGridView1);
-            this.groupBox3.Location = new System.Drawing.Point(14, 392);
+            this.groupBox3.Location = new System.Drawing.Point(134, 168);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(862, 315);
+            this.groupBox3.Size = new System.Drawing.Size(38, 66);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Tabla de Analisis";
+            this.groupBox3.Visible = false;
             // 
             // dataGridView1
             // 
@@ -154,18 +172,18 @@
             this.Codigo.Controls.Add(this.button5);
             this.Codigo.Controls.Add(this.button4);
             this.Codigo.Controls.Add(this.richTextBox2);
-            this.Codigo.Location = new System.Drawing.Point(890, 12);
+            this.Codigo.Location = new System.Drawing.Point(12, 45);
             this.Codigo.Name = "Codigo";
-            this.Codigo.Size = new System.Drawing.Size(690, 374);
+            this.Codigo.Size = new System.Drawing.Size(710, 471);
             this.Codigo.TabIndex = 3;
             this.Codigo.TabStop = false;
-            this.Codigo.Text = "Codigo";
+            this.Codigo.Text = "Perfil del paciente";
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(180, 338);
+            this.button6.Location = new System.Drawing.Point(186, 426);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(114, 29);
+            this.button6.Size = new System.Drawing.Size(184, 39);
             this.button6.TabIndex = 3;
             this.button6.Text = "Comprobar";
             this.button6.UseVisualStyleBackColor = true;
@@ -173,9 +191,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(92, 338);
+            this.button5.Location = new System.Drawing.Point(98, 426);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(82, 29);
+            this.button5.Size = new System.Drawing.Size(82, 39);
             this.button5.TabIndex = 2;
             this.button5.Text = "Guardar";
             this.button5.UseVisualStyleBackColor = true;
@@ -183,9 +201,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(0, 338);
+            this.button4.Location = new System.Drawing.Point(6, 426);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(86, 29);
+            this.button4.Size = new System.Drawing.Size(86, 39);
             this.button4.TabIndex = 1;
             this.button4.Text = "Abrir";
             this.button4.UseVisualStyleBackColor = true;
@@ -193,21 +211,22 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(0, 28);
+            this.richTextBox2.Location = new System.Drawing.Point(6, 26);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(684, 306);
+            this.richTextBox2.Size = new System.Drawing.Size(684, 394);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.dataGridView2);
-            this.groupBox4.Location = new System.Drawing.Point(880, 392);
+            this.groupBox4.Location = new System.Drawing.Point(843, 189);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(698, 315);
+            this.groupBox4.Size = new System.Drawing.Size(45, 45);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tabla de Acciones";
+            this.groupBox4.Visible = false;
             // 
             // dataGridView2
             // 
@@ -243,11 +262,80 @@
             this.AccionTraduccion.HeaderText = "Accion Traduccion";
             this.AccionTraduccion.Name = "AccionTraduccion";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.textoDieta);
+            this.groupBox5.Location = new System.Drawing.Point(728, 45);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(669, 471);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Dieta recomendada:";
+            // 
+            // textoDieta
+            // 
+            this.textoDieta.Location = new System.Drawing.Point(8, 26);
+            this.textoDieta.Name = "textoDieta";
+            this.textoDieta.Size = new System.Drawing.Size(656, 434);
+            this.textoDieta.TabIndex = 0;
+            this.textoDieta.Text = "";
+            // 
+            // alimentosDataSet
+            // 
+            this.alimentosDataSet.DataSetName = "AlimentosDataSet";
+            this.alimentosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // carnesBindingSource
+            // 
+            this.carnesBindingSource.DataMember = "Carnes";
+            this.carnesBindingSource.DataSource = this.alimentosDataSet;
+            // 
+            // carnesTableAdapter
+            // 
+            this.carnesTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.CarnesTableAdapter = this.carnesTableAdapter;
+            this.tableAdapterManager.CerealesTableAdapter = this.cerealesTableAdapter;
+            this.tableAdapterManager.LacteosTableAdapter = this.lacteosTableAdapter;
+            this.tableAdapterManager.UpdateOrder = Compiladores.AlimentosDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.VerdurasTableAdapter = this.verdurasTableAdapter;
+            // 
+            // cerealesTableAdapter
+            // 
+            this.cerealesTableAdapter.ClearBeforeFill = true;
+            // 
+            // lacteosTableAdapter
+            // 
+            this.lacteosTableAdapter.ClearBeforeFill = true;
+            // 
+            // verdurasTableAdapter
+            // 
+            this.verdurasTableAdapter.ClearBeforeFill = true;
+            // 
+            // cerealesBindingSource
+            // 
+            this.cerealesBindingSource.DataMember = "Cereales";
+            this.cerealesBindingSource.DataSource = this.alimentosDataSet;
+            // 
+            // lacteosBindingSource
+            // 
+            this.lacteosBindingSource.DataMember = "Lacteos";
+            this.lacteosBindingSource.DataSource = this.alimentosDataSet;
+            // 
+            // verdurasBindingSource
+            // 
+            this.verdurasBindingSource.DataMember = "Verduras";
+            this.verdurasBindingSource.DataSource = this.alimentosDataSet;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1611, 722);
+            this.ClientSize = new System.Drawing.Size(1426, 532);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.Codigo);
             this.Controls.Add(this.groupBox3);
@@ -255,6 +343,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -262,6 +351,12 @@
             this.Codigo.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.alimentosDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.carnesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cerealesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lacteosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.verdurasBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -289,6 +384,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cadena;
         private System.Windows.Forms.DataGridViewTextBoxColumn Acciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccionTraduccion;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RichTextBox textoDieta;
+        private AlimentosDataSet alimentosDataSet;
+        private System.Windows.Forms.BindingSource carnesBindingSource;
+        private AlimentosDataSetTableAdapters.CarnesTableAdapter carnesTableAdapter;
+        private AlimentosDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private AlimentosDataSetTableAdapters.CerealesTableAdapter cerealesTableAdapter;
+        private System.Windows.Forms.BindingSource cerealesBindingSource;
+        private AlimentosDataSetTableAdapters.LacteosTableAdapter lacteosTableAdapter;
+        private System.Windows.Forms.BindingSource lacteosBindingSource;
+        private AlimentosDataSetTableAdapters.VerdurasTableAdapter verdurasTableAdapter;
+        private System.Windows.Forms.BindingSource verdurasBindingSource;
     }
 }
 

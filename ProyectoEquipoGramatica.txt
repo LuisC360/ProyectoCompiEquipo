@@ -6,7 +6,7 @@ Enfermedad0 -> OpcionesEnfermedades Enfermedad0 | OpcionesEnfermedades
 OpcionesEnfermedades -> Presion: Numero mmHg | Glucosa: Numero mg/dl | Diabetes: TipoDiabetes | Trigliceridos: Numero mg/dl
 Alimento -> Alimentos: Alimento0
 Alimento0 -> OpcionesAlimentos Alimento0 | OpcionesAlimentos
-OpcionesAlimentos -> Lacteos | Carnes | Verduras | Embutidos | Cereales
+OpcionesAlimentos -> Lacteos | Carnes | Verduras | Cereales
 Paciente -> Nombre: Nombre
 Edad -> Edad: Numero
 Peso -> Peso: Numero kg
